@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.alibaba.android.arouter.utils.Consts.SUFFIX_AUTOWIRED;
+import static com.alibaba.android.arouter.utils.Consts.TAG;
+import static com.alibaba.android.arouter.launcher.ARouter.logger;
 
 /**
  * Autowired service impl.
@@ -43,6 +45,10 @@ public class AutowiredServiceImpl implements AutowiredService {
                 classCache.put(className, autowiredHelper);
             }
         } catch (Exception ex) {
+            ex.printStackTrace();
+            if (logger != null) {
+                logger.error(TAG, "autowire failed exception = " + ex);
+            }
             blackList.add(className);    // This instance need not autowired.
         }
     }
